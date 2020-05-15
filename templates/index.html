@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dodavanje ComTrade produkta</title>
+    <link rel="stylesheet" type="text/css" href='{{ url_for('static',filename='style.css') }}'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0"/>
+</head>
+<body>
+    <h1>Dodavanje i azuriranje produkta</h1>
+    <form onsubmit=disabled() method="POST" enctype= multipart/form-data><br>
+        
+        <label>Dodati kategorije:</label> <input type='checkbox' name='category' checked=True> <br><br>
+        <label><b>*Napomena*:</b> Prilikom koriscenja servisa prvog puta dodati sve kategorije</label><br><br>
+        <input type="submit" class='custom-file-upload' value='Pocnite sa dodavanjem i azuriranjem' id='submit_action' >
+        <br>
+    </form><br>
+    <h2>Logs:</h2>
+    <ul id="place">
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+        
+        (function worker() {
+            $.ajax({
+                url:'/logs',
+                type:'get',
+                dataType:'text',
+                cache:false,
+                success:function (response){
+                    var lines=response.split("\n");
+                    lines=lines.slice(-6);
+                    lines.pop()
+                    elem=$("#place")[0];
+                    input=$("#submit_action");
+                    /*console.log(lines);*/
+                    elem.innerHTML='';
+                    
+                    for (line of lines){
+                        if (line.indexOf('azuriran') != -1)
+                            elem.innerHTML+="<li class='updated'>" + line + "</li>";
+                        else if (line.indexOf('kreiran') != -1)
+                            elem.innerHTML+="<li class='added'>" + line + "</li>";
+                        else
+                            elem.innerHTML+="<li class='other'>" + line + "</li>";
+                        
+                        if (line.indexOf('ENTRY') != -1)
+                            input.hide()
+                        else if (line.indexOf("FINISHED") != -1)
+                            input.show()
+                        
+                            
+
+                    }
+                },
+                complete: function(response) {
+                // Schedule the next request when the current one's complete
+                    setTimeout(worker,4000);
+                },
+                error:function(jqxhr,status){
+                    console.log(status);
+                }
+            });
+            })(); 
+            
+
+        
+</script>
+</body>
+</html>

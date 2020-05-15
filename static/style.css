@@ -1,0 +1,69 @@
+html{
+    font-size:22px;
+    font-family: 'Roboto','sans-serif';
+}
+
+body{
+    margin:0 auto;
+    text-align:center;
+}
+
+.custom-file-upload{
+    background-color: #00a84f;
+    border-color: #00a84f;
+    border-radius:4px;
+    border-style:solid;
+    padding:14px 20px ;
+    transition-duration: 0.4s;
+    color:white;
+    font-size:20px;
+    cursor: pointer;
+ }
+
+ .custom-file-upload:hover{
+    background-color:white;
+    color:black;
+    cursor:pointer;
+ }
+
+button{
+    display:none;
+    background-color:gray;
+    border-color:gray;
+ }
+
+ input[type='checkbox']{
+    width:17px;
+    height:17px;
+    display:inline-block;
+    cursor: pointer;
+ }
+
+ul{
+     display:inline-block;
+     margin-right: 30px;
+ }
+
+ .updated {
+     background-color: orange;
+ }
+
+ .added {
+     background-color:green;
+ }
+
+ .other{
+     background-color:  #0035c7;
+ }
+ 
+ li{
+    
+    line-height: 50px;
+    padding-left: 20px; 
+    padding-right:20px;
+    border: 5px solid white;
+    border-radius: 25px;
+    color:white;
+ }
+
+
